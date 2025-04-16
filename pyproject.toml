@@ -1,0 +1,56 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "product-hunt-mcp"
+version = "1.0.0"
+description = "Product Hunt MCP Server - A FastMCP implementation for the Product Hunt API"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "Jai Pandya" }
+]
+keywords = ["mcp", "product-hunt", "fastmcp", "api", "ai"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = [
+    "fastmcp>=0.3.0",
+    "requests>=2.31.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.0.270",
+]
+
+[project.scripts]
+product-hunt-mcp = "main:main"
+
+[project.urls]
+"Homepage" = "https://github.com/your-username/product-hunt-mcp"
+"Bug Tracker" = "https://github.com/your-username/product-hunt-mcp/issues"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+select = ["E", "F", "B", "I"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.hatch.build]
+packages = ["src"] 
