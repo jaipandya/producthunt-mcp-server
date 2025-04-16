@@ -70,8 +70,6 @@ def register_comment_tools(mcp):
         after: str = None,
     ) -> Dict[str, Any]:
         """
-        [DEPRECATED] Use get_post_details with comments_count and comments_after instead. This function will be removed in a future release.
-
         Retrieve comments for a specific post by post ID or slug, with optional sorting and pagination.
 
         Parameters:

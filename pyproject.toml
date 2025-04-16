@@ -18,7 +18,6 @@ classifiers = [
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
@@ -32,25 +31,31 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "ruff>=0.0.270",
+    "black>=23.0.0",
 ]
 
 [project.scripts]
 product-hunt-mcp = "main:main"
 
 [project.urls]
-"Homepage" = "https://github.com/your-username/product-hunt-mcp"
-"Bug Tracker" = "https://github.com/your-username/product-hunt-mcp/issues"
+"Homepage" = "https://github.com/jaipandya/producthunt-mcp-server"
+"Bug Tracker" = "https://github.com/jaipandya/producthunt-mcp-server/issues"
+"Documentation" = "https://github.com/jaipandya/producthunt-mcp-server#readme"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 
 [tool.ruff]
 line-length = 100
-target-version = "py39"
+target-version = "py310"
 select = ["E", "F", "B", "I"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310", "py311", "py312"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src"]
 
 [tool.hatch.build]
-packages = ["src"] 
+packages = ["src"]

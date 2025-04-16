@@ -42,13 +42,31 @@
 
 - Python 3.10+
 - Product Hunt API token ([get one here](https://www.producthunt.com/v2/docs/authentication))
-- [uv](https://github.com/astral-sh/uv) package manager (recommended)
+  - You'll need to create an account on Product Hunt
+  - Navigate to the API Dashboard and create a new application
+  - Use the `Developer Token` for the token
 
-### Installation
+### Installation Options
+
+#### Option 1: Using pip (standard)
 
 ```bash
+# Install the package
+pip install -e .
+
+```
+
+#### Option 2: Using uv (recommended for faster dependency resolution)
+
+[uv](https://github.com/astral-sh/uv) is a faster alternative to pip that provides improved dependency resolution.
+
+```bash
+# Install uv if you don't have it
 pip install uv
+
+# Install the package using uv
 uv pip install -e .
+
 ```
 
 ---
@@ -61,8 +79,10 @@ Add to your Claude Desktop or Cursor configuration:
 {
   "mcpServers": {
     "product-hunt": {
-      "command": "uv",
-      "args": ["run", "product-hunt-mcp"],
+      "command": "python",  // or "uv" if using uv run
+      "args": ["-m", "path/to/product_hunt_mcp"],
+      // or use the following for uv:
+      // "args": ["run", "path/to/product-hunt-mcp"],
       "env": {
         "PRODUCT_HUNT_TOKEN": "your_token_here"
       }
@@ -75,32 +95,61 @@ Add to your Claude Desktop or Cursor configuration:
 - The token must be set as an environment variable in your Claude Desktop or Cursor config. 
 - Always restart your client after editing the config file.
 
+### Finding your configuration file
+
+- **Claude Desktop**: 
+  - Windows: `%APPDATA%\claude-desktop\config.json`
+  - macOS: `~/Library/Application Support/claude-desktop/config.json`
+  - Linux: `~/.config/claude-desktop/config.json`
+
+- **Cursor**:
+  - Windows: `%APPDATA%\Cursor\User\settings.json`
+  - macOS: `~/Library/Application Support/Cursor/User/settings.json`
+  - Linux: `~/.config/Cursor/User/settings.json`
+
 ### Docker
 
-You can also run the server in STDIO mode using Docker:
+ou can also run the server using Docker:
 
 ```bash
+# Build the Docker image
 docker build -t product-hunt-mcp .
+
+# Run the Docker container
 docker run -i --rm -e PRODUCT_HUNT_TOKEN=your_token_here product-hunt-mcp
+```
+
+For Claude Desktop integration with Docker, use this configuration:
+
+```json
+{
+  "mcpServers": {
+    "product-hunt": {
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "-e", "PRODUCT_HUNT_TOKEN=your_token_here", "product-hunt-mcp"],
+      "env": {}
+    }
+  }
+}
 ```
 
 ---
 
 ## 🛠️ MCP Tools
 
-| Tool                | Description                                 |
-|---------------------|---------------------------------------------|
-| get_post_details    | Get info about a specific post              |
-| get_posts           | Get posts with filters                      |
-| get_comment         | Get info about a specific comment           |
-| get_post_comments   | Get comments for a post                     |
-| get_collection      | Get info about a collection                 |
-| get_collections     | Get collections with filters                |
-| get_topic           | Get info about a topic                      |
-| search_topics       | Search topics                               |
-| get_user            | Get info about a user                       |
-| get_viewer          | Get info about the authenticated user       |
-| check_server_status | Check server/API status                     |
+| Tool                | Description                                 | Key Parameters |
+|---------------------|---------------------------------------------|----------------|
+| get_post_details    | Get info about a specific post              | `id` or `slug`, `comments_count`, `comments_after` |
+| get_posts           | Get posts with filters                      | `topic`, `order`, `count`, `featured`, `posted_before`, `posted_after` |
+| get_comment         | Get info about a specific comment           | `id` (required) |
+| get_post_comments   | Get comments for a post                     | `post_id` or `slug`, `order`, `count`, `after` |
+| get_collection      | Get info about a collection                 | `id` or `slug` |
+| get_collections     | Get collections with filters                | `featured`, `user_id`, `post_id`, `order`, `count` |
+| get_topic           | Get info about a topic                      | `id` or `slug` |
+| search_topics       | Search topics                               | `query`, `followed_by_user_id`, `order`, `count` |
+| get_user            | Get info about a user                       | `id` or `username`, `posts_type`, `posts_count` |
+| get_viewer          | Get info about the authenticated user       | None |
+| check_server_status | Check server/API status                     | None |
 
 ---
 
@@ -117,6 +166,21 @@ product-hunt-mcp/
     ├── tools/          # MCP tools
     └── utils/          # Utility functions
 ```
+
+---
+
+## 🔄 Rate Limiting
+
+The Product Hunt API has rate limits that this client respects. If you encounter rate limit errors, the client will inform you when the rate limit resets. You can check your current rate limit status using the `check_server_status` tool.
+
+---
+
+## 🐛 Troubleshooting
+
+- **Missing token**: Ensure your `PRODUCT_HUNT_TOKEN` is correctly set as an environment variable.
+- **Connection issues**: Verify your internet connection and that the Product Hunt API is accessible.
+- **Rate limiting**: If you hit rate limits, wait until the reset time or reduce your query frequency.
+- **Claude Desktop/Cursor not finding the server**: Verify the path to your Python executable and restart the client.
 
 ---
 
