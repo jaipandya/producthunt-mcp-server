@@ -91,6 +91,22 @@ Add to your Claude Desktop or Cursor configuration:
 }
 ```
 
+With uv:
+
+```json
+{
+  "mcpServers": {
+    "product-hunt": {
+      "command": "uv",
+      "args": ["--directory", "path/to/product-hunt-mcp", "run", "main.py"],
+      "env": {
+        "PRODUCT_HUNT_TOKEN": "your_token_here"
+      }
+    }
+  }
+}
+```
+
 - Replace `your_token_here` with your actual Product Hunt API token.
 - The token must be set as an environment variable in your Claude Desktop or Cursor config. 
 - Always restart your client after editing the config file.
