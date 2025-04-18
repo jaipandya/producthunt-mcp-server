@@ -1,11 +1,28 @@
 # 🚀 Product Hunt MCP Server
 
+[![PyPI version](https://img.shields.io/pypi/v/product-hunt-mcp.svg)](https://pypi.org/project/product-hunt-mcp/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 [![Docker Ready](https://img.shields.io/badge/docker-ready-blue)](Dockerfile)
 [![MCP Compatible](https://img.shields.io/badge/MCP-compatible-brightgreen)](https://modelcontextprotocol.io/)
 
 > **A plug-and-play [MCP](https://modelcontextprotocol.io/) server for Product Hunt**
+
+---
+
+## 📦 Quick Install
+
+```bash
+pip install product-hunt-mcp
+```
+
+## 🏃‍♂️ Quick Start Example
+
+```bash
+# Run the MCP server (requires PRODUCT_HUNT_TOKEN environment variable)
+export PRODUCT_HUNT_TOKEN=your_token_here
+product-hunt-mcp
+```
 
 ---
 
