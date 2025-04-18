@@ -5,7 +5,7 @@
 [![Docker Ready](https://img.shields.io/badge/docker-ready-blue)](Dockerfile)
 [![MCP Compatible](https://img.shields.io/badge/MCP-compatible-brightgreen)](https://modelcontextprotocol.io/)
 
-> **A blazing-fast, plug-and-play [MCP](https://modelcontextprotocol.io/) server for Product Hunt, built with [FastMCP](https://github.com/jlowin/fastmcp).**
+> **A plug-and-play [MCP](https://modelcontextprotocol.io/) server for Product Hunt**
 
 ---
 
@@ -41,7 +41,7 @@
 ### Prerequisites
 
 - Python 3.10+
-- Product Hunt API token ([get one here](https://www.producthunt.com/v2/docs/authentication))
+- Product Hunt API token ([get one here](https://www.producthunt.com/v2/oauth/applications))
   - You'll need to create an account on Product Hunt
   - Navigate to the API Dashboard and create a new application
   - Use the `Developer Token` for the token
@@ -79,10 +79,8 @@ Add to your Claude Desktop or Cursor configuration:
 {
   "mcpServers": {
     "product-hunt": {
-      "command": "python",  // or "uv" if using uv run
+      "command": "python",
       "args": ["-m", "path/to/product_hunt_mcp"],
-      // or use the following for uv:
-      // "args": ["run", "path/to/product-hunt-mcp"],
       "env": {
         "PRODUCT_HUNT_TOKEN": "your_token_here"
       }
@@ -125,7 +123,7 @@ With uv:
 
 ### Docker
 
-ou can also run the server using Docker:
+You can also run the server using Docker:
 
 ```bash
 # Build the Docker image
@@ -148,6 +146,8 @@ For Claude Desktop integration with Docker, use this configuration:
   }
 }
 ```
+
+> **Security Note:** Your `PRODUCT_HUNT_TOKEN` is sensitive. Do not share it or commit it to version control.
 
 ---
 
@@ -215,6 +215,15 @@ The Product Hunt API has rate limits that this client respects. If you encounter
 - [Product Hunt API Docs](https://www.producthunt.com/v2/docs)
 - [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector)
 - [Awesome MCP Servers](https://github.com/punkpeye/awesome-mcp-servers)
+
+
+---
+
+## 📝 Notes
+
+- This project is not affiliated with Product Hunt.
+- The Product Hunt API is subject to change.
+- The Product Hunt API is subject to change.
 
 ---
 
