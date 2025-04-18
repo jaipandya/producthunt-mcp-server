@@ -17,11 +17,13 @@ RUN adduser --disabled-password --gecos '' mcp_user
 # Copy package files
 COPY pyproject.toml ./
 COPY README.md ./
-COPY main.py ./
 COPY src ./src
 
-# Install dependencies using pip
-RUN pip install --no-cache-dir -e .
+# Install uv (preferred installer)
+RUN pip install --no-cache-dir uv
+
+# Install dependencies using uv
+RUN uv pip install --system .
 
 # Change ownership to the non-root user
 RUN chown -R mcp_user:mcp_user /app
@@ -29,9 +31,9 @@ RUN chown -R mcp_user:mcp_user /app
 # Switch to non-root user
 USER mcp_user
 
-# Health check (will confirm Python is working)
+# Health check - just check if the token env var is present (basic readiness)
 HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
   CMD python -c "import sys; sys.exit(0 if 'PRODUCT_HUNT_TOKEN' in __import__('os').environ else 1)"
 
-# This image only supports STDIO mode (for Claude Desktop and similar clients)
-CMD ["python", "main.py"]
+# Run the installed script
+CMD ["product-hunt-mcp"]

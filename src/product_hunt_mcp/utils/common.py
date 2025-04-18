@@ -6,8 +6,8 @@ import logging
 from functools import wraps
 from typing import Any, Callable, Dict, List, Optional, Tuple, TypeVar, cast
 
-from src.utils.rate_limit import RateLimitManager
-from src.utils.token import get_token, check_token
+from product_hunt_mcp.utils.rate_limit import RateLimitManager
+from product_hunt_mcp.utils.token import get_token, check_token
 
 logger = logging.getLogger("ph_mcp")
 
@@ -135,7 +135,7 @@ def execute_and_check_query(
         - Rate limit information
         - Error information if any, None otherwise
     """
-    from src.api.client import execute_graphql_query
+    from ..api.client import execute_graphql_query
 
     # Execute the query
     result, rate_limits, error = execute_graphql_query(query, variables)

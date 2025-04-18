@@ -46,57 +46,47 @@
   - Navigate to the API Dashboard and create a new application
   - Use the `Developer Token` for the token
 
-### Installation Options
+### Installation
 
-#### Option 1: Using pip (standard)
-
-```bash
-# Install the package
-pip install -e .
-
-```
-
-#### Option 2: Using uv (recommended for faster dependency resolution)
-
-[uv](https://github.com/astral-sh/uv) is a faster alternative to pip that provides improved dependency resolution.
+**Preferred: [uv](https://github.com/astral-sh/uv) (fast, modern Python installer)**
 
 ```bash
 # Install uv if you don't have it
 pip install uv
+```
 
-# Install the package using uv
-uv pip install -e .
+#### Install from PyPI (recommended)
+```bash
+uv pip install product-hunt-mcp
+# or
+pip install product-hunt-mcp
+```
 
+#### Install from GitHub (latest main branch)
+```bash
+uv pip install 'git+https://github.com/jaipandya/producthunt-mcp-server.git'
+# or
+pip install 'git+https://github.com/jaipandya/producthunt-mcp-server.git'
+```
+
+#### Install locally from source
+```bash
+uv pip install .
+# or
+pip install .
 ```
 
 ---
 
 ## 🚀 Usage with Claude Desktop & Cursor
 
-Add to your Claude Desktop or Cursor configuration:
+Once installed, the `product-hunt-mcp` command will be available. Add it to your Claude Desktop or Cursor configuration:
 
 ```json
 {
   "mcpServers": {
     "product-hunt": {
-      "command": "python",
-      "args": ["-m", "path/to/product_hunt_mcp"],
-      "env": {
-        "PRODUCT_HUNT_TOKEN": "your_token_here"
-      }
-    }
-  }
-}
-```
-
-With uv:
-
-```json
-{
-  "mcpServers": {
-    "product-hunt": {
-      "command": "uv",
-      "args": ["--directory", "path/to/product-hunt-mcp", "run", "main.py"],
+      "command": "product-hunt-mcp",
       "env": {
         "PRODUCT_HUNT_TOKEN": "your_token_here"
       }
@@ -106,8 +96,8 @@ With uv:
 ```
 
 - Replace `your_token_here` with your actual Product Hunt API token.
-- The token must be set as an environment variable in your Claude Desktop or Cursor config. 
-- Always restart your client after editing the config file.
+- The token **must** be set as an environment variable in your Claude Desktop or Cursor config for the server to authenticate.
+- Always restart your client (Claude Desktop/Cursor) after editing the config file.
 
 ### Finding your configuration file
 
@@ -129,11 +119,11 @@ You can also run the server using Docker:
 # Build the Docker image
 docker build -t product-hunt-mcp .
 
-# Run the Docker container
+# Run the Docker container (interactive for MCP)
 docker run -i --rm -e PRODUCT_HUNT_TOKEN=your_token_here product-hunt-mcp
 ```
 
-For Claude Desktop integration with Docker, use this configuration:
+For Claude Desktop/Cursor integration with Docker, use this configuration:
 
 ```json
 {
@@ -165,7 +155,7 @@ For Claude Desktop integration with Docker, use this configuration:
 | search_topics       | Search topics                               | `query`, `followed_by_user_id`, `order`, `count` |
 | get_user            | Get info about a user                       | `id` or `username`, `posts_type`, `posts_count` |
 | get_viewer          | Get info about the authenticated user       | None |
-| check_server_status | Check server/API status                     | None |
+| check_server_status | Check server/API status & authentication    | None |
 
 ---
 
@@ -173,21 +163,27 @@ For Claude Desktop integration with Docker, use this configuration:
 
 ```
 product-hunt-mcp/
-├── main.py             # Entry point
-├── pyproject.toml      # Project metadata and dependencies
-├── Dockerfile          # Docker configuration
-└── src/                # Source code
-    ├── api/            # API clients
-    ├── schemas/        # Data models
-    ├── tools/          # MCP tools
-    └── utils/          # Utility functions
+├── src/
+│   └── product_hunt_mcp/ # Main package directory
+│       ├── __init__.py
+│       ├── cli.py        # Command-line entry point
+│       ├── api/          # API clients & queries
+│       ├── schemas/      # Data validation schemas
+│       ├── tools/        # MCP tool definitions
+│       └── utils/        # Utility functions
+├── pyproject.toml      # Project metadata, dependencies, build config
+├── README.md
+├── CONTRIBUTING.md
+├── CHANGELOG.md
+├── Dockerfile
+└── ... (config files, etc.)
 ```
 
 ---
 
 ## 🔄 Rate Limiting
 
-The Product Hunt API has rate limits that this client respects. If you encounter rate limit errors, the client will inform you when the rate limit resets. You can check your current rate limit status using the `check_server_status` tool.
+The Product Hunt API has rate limits that this client respects. If you encounter rate limit errors, the client will inform you when the rate limit resets. You can check your current rate limit status using the `get_api_rate_limits` or `check_server_status` tools.
 
 ---
 
@@ -216,13 +212,11 @@ The Product Hunt API has rate limits that this client respects. If you encounter
 - [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector)
 - [Awesome MCP Servers](https://github.com/punkpeye/awesome-mcp-servers)
 
-
 ---
 
 ## 📝 Notes
 
 - This project is not affiliated with Product Hunt.
-- The Product Hunt API is subject to change.
 - The Product Hunt API is subject to change.
 
 ---

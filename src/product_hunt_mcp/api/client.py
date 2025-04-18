@@ -10,8 +10,8 @@ from typing import Any, Dict, Optional, Tuple
 
 import requests
 
-from src.utils.rate_limit import RateLimitManager
-from src.utils.token import get_token, check_token
+from product_hunt_mcp.utils.rate_limit import RateLimitManager
+from product_hunt_mcp.utils.token import get_token, check_token
 
 logger = logging.getLogger("ph_mcp")
 

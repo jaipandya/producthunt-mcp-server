@@ -1,30 +1,29 @@
 #!/usr/bin/env python3
 """
-Product Hunt MCP Server
+Product Hunt MCP Server CLI Entry Point
 
-Simple entry point for the Product Hunt MCP server.
+Command-line interface entry point for the Product Hunt MCP server.
 """
 
 import logging
 import os
+from product_hunt_mcp.tools.collections import register_collection_tools
+from product_hunt_mcp.tools.comments import register_comment_tools
+from product_hunt_mcp.tools.posts import register_post_tools
+from product_hunt_mcp.tools.server import register_server_tools
+from product_hunt_mcp.tools.topics import register_topic_tools
+from product_hunt_mcp.tools.users import register_user_tools
 
-# Import tools
-from src.tools.collections import register_collection_tools
-from src.tools.comments import register_comment_tools
-from src.tools.posts import register_post_tools
-from src.tools.server import register_server_tools
-from src.tools.topics import register_topic_tools
-from src.tools.users import register_user_tools
-
+# fastmcp is an external dependency
 from fastmcp import FastMCP
 
 # Configure logging
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
-logger = logging.getLogger("ph_mcp")
+logger = logging.getLogger("ph_mcp.cli") # Adjusted logger name
 
-__version__ = "0.1.0"
+__version__ = "0.1.0" # Consider getting this from the package metadata later
 
 def main():
     """Run the Product Hunt MCP server."""
@@ -46,4 +45,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main() 

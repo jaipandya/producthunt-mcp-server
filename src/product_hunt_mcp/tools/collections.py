@@ -4,11 +4,10 @@ Collection-related tools for the Product Hunt MCP server.
 
 import logging
 from typing import Any, Dict
-
-from src.api.client import execute_graphql_query
-from src.api.queries import COLLECTION_QUERY, COLLECTIONS_QUERY
-from src.schemas.validation import COLLECTION_SCHEMA, COLLECTIONS_SCHEMA
-from src.utils.common import (
+from product_hunt_mcp.api.client import execute_graphql_query
+from product_hunt_mcp.api.queries import COLLECTION_QUERY, COLLECTIONS_QUERY
+from product_hunt_mcp.schemas.validation import COLLECTION_SCHEMA, COLLECTIONS_SCHEMA
+from product_hunt_mcp.utils.common import (
     add_id_or_slug,
     apply_pagination_defaults,
     execute_and_check_query,
@@ -17,7 +16,7 @@ from src.utils.common import (
     handle_errors,
     require_token,
 )
-from src.utils.validation import validate_with_schema
+from product_hunt_mcp.utils.validation import validate_with_schema
 
 logger = logging.getLogger("ph_mcp")
 

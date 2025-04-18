@@ -41,7 +41,7 @@ Thank you for your interest in contributing! 🎉
 ## Submitting Pull Requests
 
 - Open a pull request against the `main` branch.
-- Fill out the PR template and describe your changes clearly.
+- Fill out the PR description and describe your changes clearly.
 - Reference any related issues.
 
 ## Reporting Issues

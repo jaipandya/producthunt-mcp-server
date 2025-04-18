@@ -35,15 +35,12 @@ dev = [
 ]
 
 [project.scripts]
-product-hunt-mcp = "main:main"
+product-hunt-mcp = "product_hunt_mcp.cli:main"
 
 [project.urls]
 "Homepage" = "https://github.com/jaipandya/producthunt-mcp-server"
 "Bug Tracker" = "https://github.com/jaipandya/producthunt-mcp-server/issues"
 "Documentation" = "https://github.com/jaipandya/producthunt-mcp-server#readme"
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
 
 [tool.ruff]
 line-length = 100
@@ -53,9 +50,3 @@ select = ["E", "F", "B", "I"]
 [tool.black]
 line-length = 100
 target-version = ["py310", "py311", "py312"]
-
-[tool.hatch.build.targets.wheel]
-packages = ["src"]
-
-[tool.hatch.build]
-packages = ["src"]
