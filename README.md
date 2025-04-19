@@ -63,6 +63,8 @@ product-hunt-mcp
   - Navigate to the API Dashboard and create a new application
   - Use the `Developer Token` for the token
 
+> **Note:** When creating a new application on Product Hunt, you will be asked for a `redirect_uri`. While the MCP server does not use the redirect URI, it is a required field. You can enter any valid URL, such as `https://localhost:8424/callback`.
+
 ### Installation
 
 **Preferred: [uv](https://github.com/astral-sh/uv) (fast, modern Python installer)**
@@ -115,6 +117,14 @@ Once installed, the `product-hunt-mcp` command will be available. Add it to your
 - Replace `your_token_here` with your actual Product Hunt API token.
 - The token **must** be set as an environment variable in your Claude Desktop or Cursor config for the server to authenticate.
 - Always restart your client (Claude Desktop/Cursor) after editing the config file.
+
+> **Tip:** On macOS, Claude Desktop may not always find the `product-hunt-mcp` command if it's not in the default PATH. If you encounter issues, you can provide the full path to the executable. After installing, run:
+>
+> ```bash
+> which product-hunt-mcp
+> ```
+>
+> Use the output path in your Claude Desktop config, replacing `"command": "product-hunt-mcp"` with the full path (e.g., `"command": "/Users/youruser/.local/bin/product-hunt-mcp"`).
 
 ### Finding your configuration file
 
