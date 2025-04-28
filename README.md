@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/mseep-audited.png)](https://mseep.ai/app/jaipandya-producthunt-mcp-server)
+
 # 🚀 Product Hunt MCP Server
 
 [![PyPI version](https://img.shields.io/pypi/v/product-hunt-mcp.svg)](https://pypi.org/project/product-hunt-mcp/)
